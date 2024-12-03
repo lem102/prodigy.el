@@ -1550,10 +1550,11 @@ beginning of the line."
 (defun prodigy ()
   "Manage external services from within Emacs."
   (interactive)
-  (with-current-buffer (get-buffer-create prodigy-buffer-name)
-    (prodigy-mode)
-    (prodigy-start-status-check-timer)
-    (pop-to-buffer (current-buffer))))
+  (let ((buffer (get-buffer-create prodigy-buffer-name)))
+    (with-current-buffer buffer
+      (prodigy-mode)
+      (prodigy-start-status-check-timer))
+    (pop-to-buffer buffer)))
 
 (provide 'prodigy)
 
